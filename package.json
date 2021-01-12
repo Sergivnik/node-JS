@@ -1,0 +1,24 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello-npm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sergivnik/node-JS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sergivnik/node-JS/issues"
+  },
+  "homepage": "https://github.com/Sergivnik/node-JS#readme",
+  "dependencies": {
+    "audic": "^2.0.0",
+    "colors": "^1.4.0",
+    "play-sound": "^1.1.3"
+  }
+}
