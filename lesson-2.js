@@ -23,8 +23,16 @@ rl.on("line", function (cmd) {
   console.log("Your bet: " + cmd);
   let myBet = Math.floor(Math.random() * 2 + 1);
   let resultGame = myBet == cmd ? "Win" : "Loss";
-  console.log(`My bet is ${myBet}`.green, `You're ${resultGame.toLowerCase()}`.yellow);
+  console.log(
+    myBet == cmd
+      ? colors.red(`My bet is ${myBet}`)
+      : colors.green(`My bet is ${myBet}`),
+    myBet == cmd
+      ? colors.green(`You're ${resultGame.toLowerCase()}`)
+      : colors.red(`You're ${resultGame.toLowerCase()}`)
+  );
   report.push({ game_number: lastNumber, result: resultGame });
+
   fs.writeFile(argv._[0], JSON.stringify(report, null, "\t"), function (err) {
     if (err) throw err;
     //console.log(data.toString());
