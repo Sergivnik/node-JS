@@ -1,4 +1,5 @@
 var argv = require("minimist")(process.argv.slice(2));
+var colors = require("colors");
 var readline = require("readline");
 var fs = require("fs");
 
@@ -22,7 +23,7 @@ rl.on("line", function (cmd) {
   console.log("Your bet: " + cmd);
   let myBet = Math.floor(Math.random() * 2 + 1);
   let resultGame = myBet == cmd ? "Win" : "Loss";
-  console.log(`My bet is ${myBet} You're ${resultGame.toLowerCase()}`);
+  console.log(`My bet is ${myBet}`.green, `You're ${resultGame.toLowerCase()}`.yellow);
   report.push({ game_number: lastNumber, result: resultGame });
   fs.writeFile(argv._[0], JSON.stringify(report, null, "\t"), function (err) {
     if (err) throw err;
@@ -33,7 +34,7 @@ rl.on("line", function (cmd) {
   fs.readFile(argv._[0], function (err, data) {
     if (err) throw err;
     report = JSON.parse(data);
-    console.log(report);
+    //console.log(report);
     let totalWin = 0;
     let totalLoss = 0;
     let seriesWin = 1;
@@ -44,25 +45,24 @@ rl.on("line", function (cmd) {
     report.forEach((element) => {
       if (element.result == "Win") totalWin++;
       if (element.result == "Loss") totalLoss++;
-      if (element.result == lastResult && element.result == "Win") seriesWin++;
-      if (element.result == lastResult && element.result == "Loss")
+      if (element.result == lastResult && element.result == "Win") {
+        seriesWin++;
+        if (seriesWin > maxSeriesWin) maxSeriesWin = seriesWin;
+      }
+      if (element.result == lastResult && element.result == "Loss") {
         seriesLoss++;
+        if (seriesLoss > maxSeriesLoss) maxSeriesLoss = seriesLoss;
+      }
       if (element.result != lastResult) {
-        if (lastResult == "Win") {
-          maxSeriesWin = seriesWin >= maxSeriesWin ? seriesWin : maxSeriesWin;
-          seriesWin = 1;
-        } else {
-          maxSeriesLoss =
-            seriesLoss >= maxSeriesLoss ? seriesLoss : maxSeriesLoss;
-          seriesLoss = 1;
-        }
+        seriesWin = 1;
+        seriesLoss = 1;
       }
       lastResult = element.result;
     });
-    console.log("Total games - ", report.length);
-    console.log("Total Wins - ", totalWin);
-    console.log("Total Losss - ", totalLoss);
-    console.log("Max wins series - ", maxSeriesWin);
-    console.log("Max wins series - ", maxSeriesLoss);
+    console.log("Total games - ".yellow, report.length);
+    console.log("Total Wins - ".yellow, totalWin);
+    console.log("Total Loss - ".yellow, totalLoss);
+    console.log("Max wins series - ".yellow, maxSeriesWin);
+    console.log("Max losses series - ".yellow, maxSeriesLoss);
   });
 });

@@ -65,11 +65,11 @@
 	},
 	{
 		"game_number": 17,
-		"result": "Win"
+		"result": "Loss"
 	},
 	{
 		"game_number": 18,
-		"result": "Loss"
+		"result": "Win"
 	},
 	{
 		"game_number": 19,
@@ -77,6 +77,46 @@
 	},
 	{
 		"game_number": 20,
+		"result": "Win"
+	},
+	{
+		"game_number": 21,
+		"result": "Win"
+	},
+	{
+		"game_number": 22,
+		"result": "Win"
+	},
+	{
+		"game_number": 23,
+		"result": "Win"
+	},
+	{
+		"game_number": 24,
+		"result": "Win"
+	},
+	{
+		"game_number": 25,
+		"result": "Loss"
+	},
+	{
+		"game_number": 26,
+		"result": "Loss"
+	},
+	{
+		"game_number": 27,
+		"result": "Loss"
+	},
+	{
+		"game_number": 28,
+		"result": "Win"
+	},
+	{
+		"game_number": 29,
+		"result": "Loss"
+	},
+	{
+		"game_number": 30,
 		"result": "Loss"
 	}
 ]
