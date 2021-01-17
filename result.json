@@ -1,0 +1,82 @@
+[
+	{
+		"game_number": 1,
+		"result": "Win"
+	},
+	{
+		"game_number": 2,
+		"result": "Loss"
+	},
+	{
+		"game_number": 3,
+		"result": "Loss"
+	},
+	{
+		"game_number": 4,
+		"result": "Loss"
+	},
+	{
+		"game_number": 5,
+		"result": "Loss"
+	},
+	{
+		"game_number": 6,
+		"result": "Win"
+	},
+	{
+		"game_number": 7,
+		"result": "Win"
+	},
+	{
+		"game_number": 8,
+		"result": "Loss"
+	},
+	{
+		"game_number": 9,
+		"result": "Loss"
+	},
+	{
+		"game_number": 10,
+		"result": "Win"
+	},
+	{
+		"game_number": 11,
+		"result": "Loss"
+	},
+	{
+		"game_number": 12,
+		"result": "Win"
+	},
+	{
+		"game_number": 13,
+		"result": "Win"
+	},
+	{
+		"game_number": 14,
+		"result": "Loss"
+	},
+	{
+		"game_number": 15,
+		"result": "Loss"
+	},
+	{
+		"game_number": 16,
+		"result": "Loss"
+	},
+	{
+		"game_number": 17,
+		"result": "Win"
+	},
+	{
+		"game_number": 18,
+		"result": "Loss"
+	},
+	{
+		"game_number": 19,
+		"result": "Win"
+	},
+	{
+		"game_number": 20,
+		"result": "Loss"
+	}
+]
