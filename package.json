@@ -19,6 +19,7 @@
   "dependencies": {
     "audic": "^2.0.0",
     "colors": "^1.4.0",
+    "minimist": "^1.2.5",
     "play-sound": "^1.1.3"
   }
 }
