@@ -11,10 +11,12 @@ var rl = readline.createInterface({
   output: process.stdout, // вывод в стандартный поток
 });
 let lastNumber;
-let report=[];
+let report = [];
+let readError = false;
 fs.readFile(argv._[0], function (err, data) {
   if (err) {
-    console.log("error", err);
+    console.log("error");
+    readError = true;
   } else {
     report = JSON.parse(data);
     lastNumber = report[report.length - 1].game_number + 1;
@@ -35,14 +37,16 @@ rl.on("line", function (cmd) {
   );
   report.push({ game_number: lastNumber, result: resultGame });
 
-  fs.writeFile(argv._[0], JSON.stringify(report, null, "\t"), function (err) {
-    if (err) console.log("error", err);
-  });
+  if (!readError) {
+    fs.writeFile(argv._[0], JSON.stringify(report, null, "\t"), function (err) {
+      if (err) console.log("error");
+    });
+  }
   rl.close();
 
   fs.readFile(argv._[0], function (err, data) {
     if (err) {
-      console.log("error", err);
+      console.log("error");
     } else {
       report = JSON.parse(data);
       //console.log(report);
