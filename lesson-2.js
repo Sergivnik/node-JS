@@ -1,7 +1,11 @@
+// node lesson-2.js  result.json 
+// команда запуска
+
 var argv = require("minimist")(process.argv.slice(2));
 var colors = require("colors");
 var readline = require("readline");
 var fs = require("fs");
+const { time } = require("console");
 
 //const util = require("util");
 console.dir(argv._[0]);
