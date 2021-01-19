@@ -158,5 +158,17 @@
 	{
 		"game_number": 40,
 		"result": "Loss"
+	},
+	{
+		"game_number": 41,
+		"result": "Loss"
+	},
+	{
+		"game_number": 42,
+		"result": "Loss"
+	},
+	{
+		"game_number": 43,
+		"result": "Loss"
 	}
 ]
