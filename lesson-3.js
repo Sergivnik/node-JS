@@ -1,21 +1,12 @@
-var http = require("http");
-var options = {
-  hostname: "www.google.com",
-  port: 80,
-  path: "/upload",
-  method: "POST",
-};
-var req = http.request(options, function (res) {
-  console.log("STATUS: " + res.statusCode);
-  console.log("HEADERS: " + JSON.stringify(res.headers));
-  res.setEncoding("utf8");
-  res.on("data", function (chunk) {
-    console.log("BODY: " + chunk);
-  });
+var request = require("request");
+var cheerio = require("cheerio");
+request("https://rostov.rbc.ru/", function (error, response, html) {
+  if (!error && response.statusCode == 200) {
+    var $ = cheerio.load(html);
+    console.log($("js_news_feed_banner"));
+    $(".news-feed__item__title").each(function (i, element) {
+      var cols = $(this).text();
+      console.log(cols);
+    });
+  }
 });
-req.on("error", function (e) {
-  console.log("problem with request: " + e.message);
-});
-req.write("data\n");
-req.write("data\n");
-req.end();
