@@ -19,11 +19,14 @@
           headers: { "Content-Type": "application/json; charset=UTF-8" },
           body: JSON.stringify({ text: textBeforeTranslate }),
         }).then((response) => {
-          response
-            .text()
-            .then(
-              (text) => (document.getElementById("translate").value = text)
-            );
+          if (response.status === 200) {
+            console.log(response);
+            response
+              .text()
+              .then(
+                (text) => (document.getElementById("translate").value = text)
+              );
+          } else console.log(response);
         });
       };
     </script>
