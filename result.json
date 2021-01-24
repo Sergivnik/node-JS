@@ -1,0 +1,186 @@
+[
+	{
+		"game_number": 1,
+		"result": "Win"
+	},
+	{
+		"game_number": 2,
+		"result": "Loss"
+	},
+	{
+		"game_number": 3,
+		"result": "Loss"
+	},
+	{
+		"game_number": 4,
+		"result": "Loss"
+	},
+	{
+		"game_number": 5,
+		"result": "Loss"
+	},
+	{
+		"game_number": 6,
+		"result": "Win"
+	},
+	{
+		"game_number": 7,
+		"result": "Win"
+	},
+	{
+		"game_number": 8,
+		"result": "Loss"
+	},
+	{
+		"game_number": 9,
+		"result": "Loss"
+	},
+	{
+		"game_number": 10,
+		"result": "Win"
+	},
+	{
+		"game_number": 11,
+		"result": "Loss"
+	},
+	{
+		"game_number": 12,
+		"result": "Win"
+	},
+	{
+		"game_number": 13,
+		"result": "Win"
+	},
+	{
+		"game_number": 14,
+		"result": "Loss"
+	},
+	{
+		"game_number": 15,
+		"result": "Loss"
+	},
+	{
+		"game_number": 16,
+		"result": "Loss"
+	},
+	{
+		"game_number": 17,
+		"result": "Loss"
+	},
+	{
+		"game_number": 18,
+		"result": "Win"
+	},
+	{
+		"game_number": 19,
+		"result": "Win"
+	},
+	{
+		"game_number": 20,
+		"result": "Win"
+	},
+	{
+		"game_number": 21,
+		"result": "Win"
+	},
+	{
+		"game_number": 22,
+		"result": "Win"
+	},
+	{
+		"game_number": 23,
+		"result": "Win"
+	},
+	{
+		"game_number": 24,
+		"result": "Win"
+	},
+	{
+		"game_number": 25,
+		"result": "Loss"
+	},
+	{
+		"game_number": 26,
+		"result": "Loss"
+	},
+	{
+		"game_number": 27,
+		"result": "Loss"
+	},
+	{
+		"game_number": 28,
+		"result": "Win"
+	},
+	{
+		"game_number": 29,
+		"result": "Loss"
+	},
+	{
+		"game_number": 30,
+		"result": "Loss"
+	},
+	{
+		"game_number": 31,
+		"result": "Win"
+	},
+	{
+		"game_number": 32,
+		"result": "Win"
+	},
+	{
+		"game_number": 33,
+		"result": "Win"
+	},
+	{
+		"game_number": 34,
+		"result": "Win"
+	},
+	{
+		"game_number": 35,
+		"result": "Loss"
+	},
+	{
+		"game_number": 36,
+		"result": "Loss"
+	},
+	{
+		"game_number": 37,
+		"result": "Loss"
+	},
+	{
+		"game_number": 38,
+		"result": "Loss"
+	},
+	{
+		"game_number": 39,
+		"result": "Win"
+	},
+	{
+		"game_number": 40,
+		"result": "Loss"
+	},
+	{
+		"game_number": 41,
+		"result": "Loss"
+	},
+	{
+		"game_number": 42,
+		"result": "Loss"
+	},
+	{
+		"game_number": 43,
+		"result": "Loss"
+	},
+	{
+		"game_number": 44,
+		"result": "Win"
+	},
+	{
+		"game_number": 45,
+		"result": "Loss"
+	},
+	{
+		"game_number": 46,
+		"result": "Loss"
+	}
+]

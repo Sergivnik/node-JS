@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Translator</title>
+  </head>
+  <body>
+    <textarea id="text" cols="30" rows="10">dog</textarea>
+    <textarea id="translate" cols="30" rows="10"></textarea>
+    <button id="btn">Translate</button>
+    <script>
+      let btn = document.getElementById("btn");
+      btn.onclick = function () {
+        let textBeforeTranslate = document.getElementById("text").value;
+        console.log(textBeforeTranslate);
+        fetch("/translate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json; charset=UTF-8" },
+          body: JSON.stringify({ text: textBeforeTranslate }),
+        }).then((response) => {
+          if (response.status === 200) {
+            console.log(response);
+            response
+              .text()
+              .then(
+                (text) => (document.getElementById("translate").value = text)
+              );
+          } else console.log(response);
+        });
+      };
+    </script>
+  </body>
+</html>
