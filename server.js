@@ -2,10 +2,14 @@ const axios = require("axios");
 const express = require("express");
 const { IAM_TOKEN, FOLDER } = require("./keys");
 const app = express();
+var cookieParser = require("cookie-parser");
 app.use(express.static("."));
 app.use(express.json());
+app.use(cookieParser());
+
 
 app.post("/translate", (req, response) => {
+  console.log("Cookies: ", req.cookies);
   axios
     .post(
       "https://translate.api.cloud.yandex.net/translate/v2/translate/",

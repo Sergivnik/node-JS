@@ -13,6 +13,7 @@
       let btn = document.getElementById("btn");
       btn.onclick = function () {
         let textBeforeTranslate = document.getElementById("text").value;
+        document.cookie = "user=John";
         console.log(textBeforeTranslate);
         fetch("/translate", {
           method: "POST",
