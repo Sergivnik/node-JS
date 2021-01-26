@@ -1,9 +1,10 @@
 const axios = require("axios");
 const express = require("express");
+const path = require("path");
 const { IAM_TOKEN, FOLDER } = require("./keys");
 const app = express();
 var cookieParser = require("cookie-parser");
-app.use(express.static("."));
+app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.json());
 app.use(cookieParser());
 
