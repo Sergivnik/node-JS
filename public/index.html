@@ -7,12 +7,19 @@
   </head>
   <body>
     <h2>Дайжест свежих новостей</h2>
-    <label for="F1"><input type="checkbox" id="F1" />Формула 1</label>
-    <label for="F1"><input type="checkbox" id="F1" />Формула 1</label>
-    <label for="F1"><input type="checkbox" id="F1" />Формула 1</label>
-    <textarea id="text" cols="30" rows="10">dog</textarea>
-    <textarea id="translate" cols="30" rows="10"></textarea>
-    <button id="btn">Translate</button>
+    <form method="POST" action="/">
+      <label for="F1">
+        <input type="checkbox" name="F1" />
+
+        Формула 1
+      </label>
+      <label for="Football"
+        ><input type="checkbox" name="Football" />Футбол</label
+      >
+      <label for="hockey"><input type="checkbox" name="hockey" />Хоккей</label>
+      <input type="range" name="numberNews" step="1" max="10" min="1"/>
+      <button type="submit">Send</button>
+    </form>
     <script>
       let btn = document.getElementById("btn");
       btn.onclick = function () {
