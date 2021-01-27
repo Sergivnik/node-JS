@@ -32,43 +32,50 @@ async function getData(req) {
   return result;
 }
 
-app.post("/", (req, response) => {
+app.post("/", async (req, response) => {
   let arrNews = [];
-  console.log("Cookies: ", req.cookies);
   const data = req.body;
-  console.log(data);
+
   if (data.Football === "on") {
-    getData({
+    const footbalResult = await getData({
       site: "https://www.euro-football.ru/",
       selector: ".main-news__item",
       number: data.numberNews,
-    })
-      .then((result) => {
-        arrNews.push("Футбол");
-        arrNews = arrNews.concat(result);
-      })
+    });
+    const result = {
+      name: "Футбол",
+      data: await footbalResult,
+    };
+    arrNews.push(result);
   }
-  if (data.F1 === "on")
-    getData({
+  if (data.F1 === "on") {
+    const f1Result = await getData({
       site: "https://www.f1news.ru/",
       selector: ".b-news-list__title",
       number: data.numberNews,
-    })
-      .then((result) => {
-        arrNews.push("Ф1");
-        arrNews = arrNews.concat(result);
-      })
-  if (data.hockey === "on")
-    getData({
+    });
+    const result = {
+      name: "Ф1",
+      data: await f1Result,
+    };
+    arrNews.push(result);
+  }
+
+  if (data.hockey === "on") {
+    const hockeyResult = await getData({
       site: "https://allhockey.ru/",
       selector: ".summary > a",
       number: data.numberNews,
-    })
-      .then((result) => {
-        arrNews.push("Хоккей");
-        arrNews = arrNews.concat(result);
-      })
-  setTimeout(()=>response.send(arrNews), 5000); 
+    });
+
+    const result = {
+      name: "Хоккей",
+      data: await hockeyResult,
+    };
+    arrNews.push(result);
+  }
+
+  response.status(200).json(arrNews);
 });
 
 app.listen(3000, () => console.log("Listening on port 3000"));
