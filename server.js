@@ -31,6 +31,7 @@ async function getData(req) {
     })
     .catch((err) => {
       console.log("error", err);
+      return ["Что-то не ладится в Дацком корлевстве"]
     });
   let result = await a;
   return result;
@@ -96,14 +97,18 @@ app.post("/", async (req, response) => {
     };
     arrNews.push(result);
   }
-  response.render("news", {
-    Football: arrNews[0].name,
-    listFootball: arrNews[0].data,
-    F1: arrNews[1].name,
-    listF1: arrNews[1].data,
-    Hockey: arrNews[2].name,
-    listHockey: arrNews[2].data,
-  });
+  try {
+    response.render("news", {
+      Football: arrNews[0].name,
+      listFootball: arrNews[0].data,
+      F1: arrNews[1].name,
+      listF1: arrNews[1].data,
+      Hockey: arrNews[2].name,
+      listHockey: arrNews[2].data,
+    });
+  } catch (err) {
+    response.render("news", { err: true });
+  }
 });
 
 app.listen(3000, () => console.log("Listening on port 3000"));
