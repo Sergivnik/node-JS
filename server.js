@@ -31,7 +31,7 @@ async function getData(req) {
     })
     .catch((err) => {
       console.log("error", err);
-      return ["Что-то не ладится в Дацком корлевстве"]
+      return ["Что-то не ладится в Дацком корлевстве"];
     });
   let result = await a;
   return result;
@@ -40,6 +40,23 @@ async function getData(req) {
 app.post("/", async (req, response) => {
   let arrNews = [];
   const data = req.body;
+  console.log("Cookies: ", req.body);
+  if (req.body.F1 === "on") {
+    response.cookie("elemF1", "true");
+  } else {
+    response.cookie("elemF1", "false");
+  }
+  if (req.body.Football === "on") {
+    response.cookie("elemFootball", "true");
+  } else {
+    response.cookie("elemFootball", "false");
+  }
+  if (req.body.hockey === "on") {
+    response.cookie("elemHockey", "true");
+  } else {
+    response.cookie("elemHockey", "false");
+  }
+  response.cookie("elemNumberNews", req.body.numberNews);
 
   if (data.Football === "on") {
     const footbalResult = await getData({
