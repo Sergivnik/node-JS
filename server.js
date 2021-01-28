@@ -10,6 +10,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+app.set("view engine", "handlebars");
+app.set("view engine", "hbs");
+app.set("views", __dirname + "\\views");
+
 async function getData(req) {
   let listNews = [];
   a = axios
@@ -47,6 +51,12 @@ app.post("/", async (req, response) => {
       data: await footbalResult,
     };
     arrNews.push(result);
+  } else {
+    const result = {
+      name: null,
+      data: [],
+    };
+    arrNews.push(result);
   }
   if (data.F1 === "on") {
     const f1Result = await getData({
@@ -57,6 +67,12 @@ app.post("/", async (req, response) => {
     const result = {
       name: "Ф1",
       data: await f1Result,
+    };
+    arrNews.push(result);
+  } else {
+    const result = {
+      name: null,
+      data: [],
     };
     arrNews.push(result);
   }
@@ -73,9 +89,21 @@ app.post("/", async (req, response) => {
       data: await hockeyResult,
     };
     arrNews.push(result);
+  } else {
+    const result = {
+      name: null,
+      data: [],
+    };
+    arrNews.push(result);
   }
-
-  response.status(200).json(arrNews);
+  response.render("news", {
+    Football: arrNews[0].name,
+    listFootball: arrNews[0].data,
+    F1: arrNews[1].name,
+    listF1: arrNews[1].data,
+    Hockey: arrNews[2].name,
+    listHockey: arrNews[2].data,
+  });
 });
 
 app.listen(3000, () => console.log("Listening on port 3000"));
