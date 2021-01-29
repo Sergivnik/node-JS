@@ -4,22 +4,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Translator</title>
+  <link rel="stylesheet" href="/style.css" type="text/css">
+  <title>ListToDo</title>
 </head>
 
 <body>
-  <h2>Дайжест свежих новостей</h2>
-  <form name="form" method="POST" action="/">
-    <label for="F1">
-      <input type="checkbox" {{f1Check}} name="F1" />
-      Формула 1
-    </label>
-    <label for="Football"><input type="checkbox" {{footballCheck}} name="Football" />Футбол</label>
-    <label for="hockey"><input type="checkbox" {{hockeyCheck}} name="hockey" />Хоккей</label>
-    <input type="range" name="numberNews" step="1" max="10" min="1" value={{newsNumber}} />
-    <button type="submit">Send</button>
-  </form>
-
+  <h2>List to do</h2>
+  <table class="tbl">
+    <tr>
+      <td class="tbl">Business</td>
+      <td class="tbl">Priority</td>
+      <td class="tbl">comlete</td>
+    </tr>
+    {{#each data}}
+    <tr>
+      <td class="tbl-slim">{{business}}</td>
+      <td class="tbl-slim">{{priority}}</td>
+      <td class="tbl-slim">{{complete}}</td>
+    </tr>
+    {{/each}}
+  </table>
 </body>
 
 </html>

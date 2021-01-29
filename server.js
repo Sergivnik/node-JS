@@ -2,8 +2,10 @@ const axios = require("axios");
 const express = require("express");
 const path = require("path");
 const app = express();
+app.use(express.static(path.join(__dirname, "public")));
+
 var cookieParser = require("cookie-parser");
-var cheerio = require("cheerio");
+var tasks = require("./models/tasks");
 
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.json());
@@ -14,129 +16,20 @@ app.set("view engine", "handlebars");
 app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 
-async function getData(req) {
-  let listNews = [];
-  a = axios
-    .get(req.site)
-    .then((response) => {
-      var $ = cheerio.load(response.data);
-      $(req.selector).each(function (i, element) {
-        var cols = $(this).text();
-        cols = cols.replace(/^\s*/gm, "").replace(/\s+$/, "");
-        listNews.push(cols);
-        if (i > req.number - 2) return false;
-      });
-      listNews.push("");
-      return listNews;
-    })
-    .catch((err) => {
-      console.log("error", err);
-      return ["Что-то не ладится в Дацком корлевстве"];
-    });
-  let result = await a;
-  return result;
-}
-
 app.get("/", (req, res) => {
-  console.log(req.cookies);
-  let cookiesData = {};
-  cookiesData.footballCheck =
-    req.cookies.elemFootball === "false" ? "" : "checked";
-  cookiesData.f1Check = req.cookies.elemF1 === "false" ? "" : "checked";
-  cookiesData.hockeyCheck = req.cookies.elemHockey === "false" ? "" : "checked";
-  cookiesData.newsNumber = req.cookies.elemNumberNews;
-  res.render("startPage.hbs", cookiesData);
+  tasks.list((data) => {
+    if (data.error) {
+      console.log(data.error.errno);
+      res.render("errorPage.hbs", {err: data.error.errno});
+    } else {
+      data.forEach((elem) => {
+        elem.complete = elem.complete ? "true" : "false";
+      });
+      res.render("startPage.hbs", { data });
+    }
+  });
 });
 
-app.post("/", async (req, response) => {
-  let arrNews = [];
-  const data = req.body;
-  console.log("Cookies: ", req.body);
-  if (req.body.F1 === "on") {
-    response.cookie("elemF1", "true");
-  } else {
-    response.cookie("elemF1", "false");
-  }
-  if (req.body.Football === "on") {
-    response.cookie("elemFootball", "true");
-  } else {
-    response.cookie("elemFootball", "false");
-  }
-  if (req.body.hockey === "on") {
-    response.cookie("elemHockey", "true");
-  } else {
-    response.cookie("elemHockey", "false");
-  }
-  response.cookie("elemNumberNews", req.body.numberNews);
-
-  if (data.Football === "on") {
-    const footbalResult = await getData({
-      site: "https://www.euro-football.ru/",
-      selector: ".main-news__item",
-      number: data.numberNews,
-    });
-    const result = {
-      name: "Футбол",
-      data: await footbalResult,
-    };
-    arrNews.push(result);
-  } else {
-    const result = {
-      name: null,
-      data: [],
-    };
-    arrNews.push(result);
-  }
-  if (data.F1 === "on") {
-    const f1Result = await getData({
-      site: "https://www.f1news.ru/",
-      selector: ".b-news-list__title",
-      number: data.numberNews,
-    });
-    const result = {
-      name: "Ф1",
-      data: await f1Result,
-    };
-    arrNews.push(result);
-  } else {
-    const result = {
-      name: null,
-      data: [],
-    };
-    arrNews.push(result);
-  }
-
-  if (data.hockey === "on") {
-    const hockeyResult = await getData({
-      site: "https://allhockey.ru/",
-      selector: ".summary > a",
-      number: data.numberNews,
-    });
-
-    const result = {
-      name: "Хоккей",
-      data: await hockeyResult,
-    };
-    arrNews.push(result);
-  } else {
-    const result = {
-      name: null,
-      data: [],
-    };
-    arrNews.push(result);
-  }
-  try {
-    response.render("news", {
-      Football: arrNews[0].name,
-      listFootball: arrNews[0].data,
-      F1: arrNews[1].name,
-      listF1: arrNews[1].data,
-      Hockey: arrNews[2].name,
-      listHockey: arrNews[2].data,
-    });
-  } catch (err) {
-    response.render("news", { err: true });
-  }
-});
+app.post("/", async (req, response) => {});
 
 app.listen(3000, () => console.log("Listening on port 3000"));
