@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "handlebars");
 app.set("view engine", "hbs");
-app.set("views", __dirname + "\\views");
+app.set("views", __dirname + "/views");
 
 async function getData(req) {
   let listNews = [];
@@ -36,6 +36,17 @@ async function getData(req) {
   let result = await a;
   return result;
 }
+
+app.get("/", (req, res) => {
+  console.log(req.cookies);
+  let cookiesData = {};
+  cookiesData.footballCheck =
+    req.cookies.elemFootball === "false" ? "" : "checked";
+  cookiesData.f1Check = req.cookies.elemF1 === "false" ? "" : "checked";
+  cookiesData.hockeyCheck = req.cookies.elemHockey === "false" ? "" : "checked";
+  cookiesData.newsNumber = req.cookies.elemNumberNews;
+  res.render("startPage.hbs", cookiesData);
+});
 
 app.post("/", async (req, response) => {
   let arrNews = [];
