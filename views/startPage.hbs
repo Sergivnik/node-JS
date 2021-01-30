@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Translator</title>
+</head>
+
+<body>
+  <h2>Дайжест свежих новостей</h2>
+  <form name="form" method="POST" action="/">
+    <label for="F1">
+      <input type="checkbox" {{f1Check}} name="F1" />
+      Формула 1
+    </label>
+    <label for="Football"><input type="checkbox" {{footballCheck}} name="Football" />Футбол</label>
+    <label for="hockey"><input type="checkbox" {{hockeyCheck}} name="hockey" />Хоккей</label>
+    <input type="range" name="numberNews" step="1" max="10" min="1" value={{newsNumber}} />
+    <button type="submit">Send</button>
+  </form>
+
+</body>
+
+</html>
