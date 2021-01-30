@@ -12,18 +12,26 @@
   <h2>List to do</h2>
   <table class="tbl">
     <tr>
+      <td class="tbl">ID</td>
       <td class="tbl">Business</td>
       <td class="tbl">Priority</td>
       <td class="tbl">comlete</td>
     </tr>
     {{#each data}}
     <tr>
-      <td class="tbl-slim">{{business}}</td>
+      <td class="tbl-slim">{{id}}</td>
+      <td class="tbl-slim">{{task}}</td>
       <td class="tbl-slim">{{priority}}</td>
       <td class="tbl-slim">{{complete}}</td>
     </tr>
     {{/each}}
   </table>
+  <a href="/ADD">Add task</a>
+  <a href="/DELETE">Delete task</a>
+  <a href="/SEARCH">Change task</a>
+  <a href="/COMPLETE">Complete task</a>
+  <script>
+  </script>
 </body>
 
 </html>

@@ -16,16 +16,74 @@ var Tasks = {
       });
   },
   add: function (task, callback) {
-    / /; // TODO
+    const pool = mysql2.createPool(options).promise();
+    pool
+      .query("INSERT INTO listtodo SET ?", task)
+      .then(([data, fields]) => {
+        callback(data);
+      })
+      .catch((err) => {
+        callback({ error: err });
+      })
+      .finally(() => {
+        pool.end();
+      });
   },
-  change: function (id, text, callback) {
-    / /; // TODO
+  change: function (task, callback) {
+    const pool = mysql2.createPool(options).promise();
+    pool
+      .query("UPDATE listtodo SET ? where id=?", [task, task.id])
+      .then(([data, fields]) => {
+        callback(data);
+      })
+      .catch((err) => {
+        callback({ error: err });
+      })
+      .finally(() => {
+        pool.end();
+      });
+  },
+  search: function (id, callback) {
+    const pool = mysql2.createPool(options).promise();
+    pool
+      .query("SELECT * FROM listtodo WHERE ?", id)
+      .then(([data, fields]) => {
+        callback(data);
+      })
+      .catch((err) => {
+        callback({ error: err });
+      })
+      .finally(() => {
+        pool.end();
+      });
   },
   complete: function (id, callback) {
-    / /; // TODO
+    const pool = mysql2.createPool(options).promise();
+    pool
+      .query("UPDATE listtodo SET ? where id=?", [{ complete: "1" }, id.id])
+      .then(([data, fields]) => {
+        callback(data);
+      })
+      .catch((err) => {
+        callback({ error: err });
+      })
+      .finally(() => {
+        pool.end();
+      });
   },
   delete: function (id, callback) {
-    / /; // TODO
+    const pool = mysql2.createPool(options).promise();
+    pool
+      .query("DELETE FROM listtodo WHERE ?", id)
+      .then(([data, fields]) => {
+        callback(data);
+      })
+      .catch((err) => {
+        callback({ error: err });
+      })
+      .finally(() => {
+        pool.end();
+      });
   },
 };
 module.exports = Tasks;
