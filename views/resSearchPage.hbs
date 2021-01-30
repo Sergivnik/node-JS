@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <title>ListToDo</title>
+</head>
+
+<body>
+    <h2>Changed task</h2>
+    <form name="form" method="POST" action="/CHANGETASK">
+        {{#each data}}
+        <p>ID<input type="text" name="id" value="{{id}}" /></p>
+        <p>Enter task<input type="text" name="task" value="{{task}}" /></p>
+        <p>Enter priority<input type="text" name="priority" pattern="[0-5]" value="{{priority}}" /></p>
+        <p>complete</p>
+        {{#if complete}}
+        <label>Yes<input type="radio" name="complete" checked value="1" /></label>
+        <label>No<input type="radio" name="complete" value="0" /></label>
+        {{else}}
+        <label>Yes<input type="radio" name="complete" value="1" /></label>
+        <label>No<input type="radio" name="complete" checked value="0" /></label>
+        {{/if}}
+        <input type="submit" value="change">
+        {{/each}}
+    </form>
+    <script>
+    </script>
+</body>
+
+</html>

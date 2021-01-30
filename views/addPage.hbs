@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add task</title>
+</head>
+
+<body>
+    <form name="form" method="POST" action="/ADDTASK">
+        <p>Enter task<input type="text" name="task" /></p>
+        <p>Enter priority<input type="text" name="priority" pattern="[0-5]" /></p>
+        <p>complete</p>
+        <label>Yes<input type="radio" name="complete" value="1" /></label>
+        <label>No<input type="radio" name="complete" checked value="0" /></label>
+        <input type="submit" value="send">
+    </form>
+</body>
+
+</html>
