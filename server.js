@@ -54,40 +54,65 @@ app.get("/COMPLETE", async (req, res) => {
 app.post("/ADDTASK", async (req, res) => {
   console.log("Request: ", req.body);
   tasks.add(req.body, (data) => {
-    console.log(data);
-    res.redirect("/");
+    if (data.error) {
+      console.log(data.error.errno);
+      res.render("errorPage.hbs", { err: data.error.errno });
+    } else {
+      console.log(data);
+      res.redirect("/");
+    }
   });
 });
 
 app.post("/DELETETASK", async (req, res) => {
   console.log("Request: ", req.body);
   tasks.delete(req.body, (data) => {
-    console.log(data);
-    res.redirect("/");
+    if (data.error) {
+      console.log(data.error.errno);
+      res.render("errorPage.hbs", { err: data.error.errno });
+    } else {
+      console.log(data);
+      res.redirect("/");
+    }
   });
 });
 
 app.post("/SEARCHTASK", async (req, res) => {
   console.log("Request: ", req.body);
   tasks.search(req.body, (data) => {
-    console.log(data);
-    res.render("resSearchPage.hbs", { data });
+    if (data.error) {
+      console.log(data.error.errno);
+      res.render("errorPage.hbs", { err: data.error.errno });
+    } else {
+      console.log(data);
+      res.render("resSearchPage.hbs", { data });
+    }
   });
 });
 
 app.post("/CHANGETASK", async (req, res) => {
   console.log("Request: ", req.body);
   tasks.change(req.body, (data) => {
-    console.log(data);
-    res.redirect("/");
+    if (data.error) {
+      console.log(data.error.errno);
+      res.render("errorPage.hbs", { err: data.error.errno });
+    } else {
+      console.log(data);
+      res.redirect("/");
+    }
   });
 });
 
 app.post("/COMPLETETASK", async (req, res) => {
   console.log("Request: ", req.body);
   tasks.complete(req.body, (data) => {
-    console.log(data);
-    res.redirect("/");
+    if (data.error) {
+      console.log(data.error.errno);
+      res.render("errorPage.hbs", { err: data.error.errno });
+    } else {
+      console.log(data);
+      res.redirect("/");
+    }
   });
 });
 
