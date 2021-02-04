@@ -19,6 +19,7 @@
   "dependencies": {
     "audic": "^2.0.0",
     "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
     "cheerio": "^1.0.0-rc.5",
     "colors": "^1.4.0",
     "cookie-parser": "^1.4.5",

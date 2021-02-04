@@ -18,11 +18,11 @@ const session = require("express-session");
 const sessionStore = new (require("express-mysql-session")(session))({}, db);
 const sessionMiddleware = session({
   store: sessionStore,
-  secret: "Большой секрет",
+  secret: "Top secret",
   resave: false,
   saveUninitialized: false,
   rolling: true,
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 600000 },
 });
 app.use(sessionMiddleware);
 
