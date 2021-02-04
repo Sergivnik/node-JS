@@ -5,6 +5,7 @@ var tasks = require("../models/tasks.js");
 router.get("/", (req, res) => {
   tasks.list((data) => {
     if (!req.session.username) {
+      // а тут underfined
       res.redirect("/auth/login/");
     } else {
       console.log(req.session.username);

@@ -11,9 +11,14 @@ router.post("/login/", (req, res, next) => {
     if (user.length > 0) {
       user = user[0];
       if (user[0].password === req.body.password) {
-        req.session.username = req.body.username;
+        req.session.username = req.body.username; //вот здесь "Serg"
         console.log(req.session.username);
-        res.redirect("/");
+        req.session.save(function (err) {
+          if (!err) {
+            //Data get lost here
+            res.redirect("/");
+          }
+        });
       } else {
         res.redirect("/auth/login/");
       }
