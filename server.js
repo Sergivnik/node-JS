@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const db = require("./models/db.js");
 app.use(express.static(path.join(__dirname, "public")));
 
 var tasks = require("./models/tasks");
@@ -12,6 +13,18 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "handlebars");
 app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
+
+const session = require("express-session");
+const sessionStore = new (require("express-mysql-session")(session))({}, db);
+const sessionMiddleware = session({
+  store: sessionStore,
+  secret: "Большой секрет",
+  resave: false,
+  saveUninitialized: false,
+  rolling: true,
+  cookie: { maxAge: 600000 },
+});
+app.use(sessionMiddleware);
 
 app.get("/", (req, res) => {
   tasks.list((data) => {
