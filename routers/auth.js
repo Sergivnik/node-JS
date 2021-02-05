@@ -18,6 +18,11 @@ router.get("/exit", (req, res, next) => {
 });
 
 router.post("/login/", (req, res, next) => {
+  if (req.body.save === "on") {
+    req.session.cookie.maxAge = 600000 * 6 * 24;
+  } else {
+    req.session.cookie.maxAge = 600000;
+  }
   const user = users.findUserByName(req.body.username).then((user) => {
     if (user.length > 0) {
       user = user[0];
@@ -40,11 +45,14 @@ router.post("/login/", (req, res, next) => {
 
 router.post("/signup/", (req, res, next) => {
   const password = req.body.password;
+  if (req.body.save === "on") {
+    req.session.cookie.maxAge = 600000 * 6 * 24;
+  } else {
+    req.session.cookie.maxAge = 600000;
+  }
   const newUser = users.createUser(req.body).then((user) => {
     if (user.length > 0) {
       user = user[0];
-      console.log(user[0].password);
-      console.log(req.body.password);
       if (bcryptjs.compareSync(password, user[0].password)) {
         req.session.username = req.body.username;
         console.log(req.session.username);
