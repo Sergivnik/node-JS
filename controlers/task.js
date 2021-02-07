@@ -26,7 +26,7 @@ module.exports.taskGetAdd = async (req, res) => {
     } catch {}
   }
 };
-module.exports.taskGetDelete =async (req, res) => {
+module.exports.taskGetDelete = async (req, res) => {
   if (!req.session.username) {
     res.redirect("/auth/login/");
   } else {
@@ -34,8 +34,8 @@ module.exports.taskGetDelete =async (req, res) => {
       res.render("deletePage.hbs", {});
     } catch {}
   }
-}
-module.exports.taskGetSearch =async (req, res) => {
+};
+module.exports.taskGetSearch = async (req, res) => {
   if (!req.session.username) {
     res.redirect("/auth/login/");
   } else {
@@ -43,8 +43,8 @@ module.exports.taskGetSearch =async (req, res) => {
       res.render("searchPage.hbs", {});
     } catch {}
   }
-}
-module.exports.taskGetComplete =async (req, res) => {
+};
+module.exports.taskGetComplete = async (req, res) => {
   if (!req.session.username) {
     res.redirect("/auth/login/");
   } else {
@@ -52,8 +52,8 @@ module.exports.taskGetComplete =async (req, res) => {
       res.render("completePage.hbs", {});
     } catch {}
   }
-}
-module.exports.taskPostAdd =async (req, res) => {
+};
+module.exports.taskPostAdd = async (req, res) => {
   if (!req.session.username) {
     res.redirect("/auth/login/");
   } else {
@@ -68,8 +68,8 @@ module.exports.taskPostAdd =async (req, res) => {
       }
     });
   }
-}
-module.exports.taskPostDelete = async (req, res) => {
+};
+module.exports.taskDeleteDelete = async (req, res) => {
   if (!req.session.username) {
     res.redirect("/auth/login/");
   } else {
@@ -101,7 +101,7 @@ module.exports.taskPostSearch = async (req, res) => {
     });
   }
 };
-module.exports.taskPostChange = async (req, res) => {
+module.exports.taskPutChange = async (req, res) => {
   if (!req.session.username) {
     res.redirect("/auth/login/");
   } else {
@@ -117,7 +117,7 @@ module.exports.taskPostChange = async (req, res) => {
     });
   }
 };
-module.exports.taskPostComplete = async (req, res) => {
+module.exports.taskPutComplete = async (req, res) => {
   if (!req.session.username) {
     res.redirect("/auth/login/");
   } else {
