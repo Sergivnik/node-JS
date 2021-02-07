@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const db = require("./models/db.js");
 const router = require("./routers");
 var passport = require("passport");
 var YandexStrategy = require("passport-yandex").Strategy;
@@ -14,26 +13,15 @@ app.set("view engine", "handlebars");
 app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 
-const session = require("express-session");
-const sessionStore = new (require("express-mysql-session")(session))({}, db);
-const sessionMiddleware = session({
-  store: sessionStore,
-  secret: "Top secret",
-  resave: false,
-  saveUninitialized: false,
-  rolling: true,
-  cookie: { maxAge: 600000 },
-});
-app.use(sessionMiddleware);
-
-
+const session = require("./middleware/session.js");
+app.use(session.sessionMiddleware);
 
 const yadata = require("./models/yandex.js");
 passport.use(
   new YandexStrategy(
     {
-      clientID: yadata.YANDEX_CLIENT_ID,
-      clientSecret: yadata.YANDEX_CLIENT_SECRET,
+      clientID: yadata.CLIENT_ID,
+      clientSecret: yadata.CLIENT_SECRET,
       callbackURL: "http://localhost:3000/auth/yandex/callback",
     },
     function (accessToken, refreshToken, profile, done) {
