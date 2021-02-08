@@ -8,9 +8,9 @@ router.get("/DELETE", controler.taskGetDelete);
 router.get("/SEARCH", controler.taskGetSearch);
 router.get("/COMPLETE", controler.taskGetComplete);
 router.post("/ADDTASK", controler.taskPostAdd);
-router.delete("/DELETETASK", controler.taskDeleteDelete);
+router.post("/DELETETASK", controler.taskDeleteDelete);
 router.post("/SEARCHTASK", controler.taskPostSearch);
-router.put("/CHANGETASK", controler.taskPutChange);
-router.put("/COMPLETETASK", controler.taskPutComplete);
+router.post("/CHANGETASK", controler.taskPutChange);
+router.post("/COMPLETETASK", controler.taskPutComplete);
 
 module.exports = router;

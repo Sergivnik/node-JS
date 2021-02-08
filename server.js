@@ -51,24 +51,7 @@ app.get(
     res.redirect("/");
   }
 );
-app.use("/DELETETASK", (req, res, next) => {
-  if (req.method === "POST") {
-    req.method = "DELETE";
-    next();
-  } else next();
-});
-app.use("/CHANGETASK", (req, res, next) => {
-  if (req.method === "POST") {
-    req.method = "PUT";
-    next();
-  } else next();
-});
-app.use("/COMPLETETASK", (req, res, next) => {
-  if (req.method === "POST") {
-    req.method = "PUT";
-    next();
-  } else next();
-});
+
 app.use(router);
 
 app.listen(3000, () => console.log("Listening on port 3000"));

@@ -31,7 +31,52 @@
   <a href="/SEARCH">Change task</a>
   <a href="/COMPLETE">Complete task</a>
   <a href="/auth/exit">Exit</a>
+  <br>
+  <button id="btn">Get Data</button>
   <script>
+    let btn = document.getElementById("btn");
+    btn.onclick = async () => {
+      let response = await fetch("/API/getDATA");
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
+        let tbl = document.createElement("table");
+        tbl.className = "tbl";
+        document.body.append(tbl)
+        data.forEach((elem) => {
+          let tr = document.createElement("tr");
+          tr.className = "tbl-slim";
+          tbl.append(tr)
+          let td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerText = elem.id;
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerText = elem.task;
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerText = elem.priority;
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerText = elem.complete;
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerHTML = "<button>Delete</button>";
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerHTML = `<button id=compete${elem.id}>Complete</button>`;
+          tr.append(td);
+        })
+
+      } else {
+        console.log("Error", response.status)
+      }
+    }
   </script>
 </body>
 
