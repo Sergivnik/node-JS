@@ -40,6 +40,7 @@
       if (response.ok) {
         let data = await response.json();
         console.log(data);
+        btn.remove();
         let tbl = document.createElement("table");
         tbl.className = "tbl";
         document.body.append(tbl)
@@ -65,15 +66,29 @@
           tr.append(td);
           td = document.createElement("td");
           td.className = "tbl-slim";
-          td.innerHTML = "<button>Delete</button>";
+          td.innerHTML = `<button id=delete-${elem.id}>Delete</button>`;
           tr.append(td);
           td = document.createElement("td");
           td.className = "tbl-slim";
-          td.innerHTML = `<button id=compete${elem.id}>Complete</button>`;
+          td.innerHTML = `<button id=compete-${elem.id}>Complete</button>`;
           tr.append(td);
         })
-
-      } else {
+        let btnAdd = document.createElement("button");
+        btnAdd.innerText = "Add";
+        tbl.after(btnAdd);
+        btnAdd.onclick = () => {
+          let send = document.createElement("button");
+          send.innerText = "Send";
+          btnAdd.after(send);
+          let priority = document.createElement("input");
+          priority.name = "task";
+          btnAdd.after(priority);
+          let task = document.createElement("input");
+          task.name = "task";
+          btnAdd.after(task);
+        }
+      }
+      else {
         console.log("Error", response.status)
       }
     }
