@@ -1,0 +1,12 @@
+body {
+  padding: 50px;
+}
+table.tbl {
+  border: 3px solid #000;
+}
+td.tbl {
+  border: 1px solid #000;
+}
+td.tbl-slim {
+  border: 1px solid #000;
+}
