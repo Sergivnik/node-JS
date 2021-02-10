@@ -106,26 +106,24 @@
           if (str.includes("delete")) {
             action = "delete";
             id = str.substring(7);
-            let obj = { id: id }
-            let response = await fetch("/API/deleteID", {
+            let response = await fetch(`/API/${id}`, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json;charset=utf-8'
               },
-              body: JSON.stringify(obj)
+              body: JSON.stringify()
             });
           };
           if (str.includes("complete")) {
             action = "complete";
             id = str.substring(9);
-            let obj = { id: id }
             console.log(action, id);
-            let response = await fetch("/API/completeID", {
+            let response = await fetch(`/API/${id}`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json;charset=utf-8'
               },
-              body: JSON.stringify(obj)
+              body: JSON.stringify()
             });
           };
 

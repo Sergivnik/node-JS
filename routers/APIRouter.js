@@ -4,7 +4,7 @@ const API = require("../controlers/API.js");
 
 router.get("/getDATA", API.taskGet);
 router.post("/addDATA", API.taskAdd);
-router.delete("/deleteID", API.deleteID);
-router.put("/completeID", API.completeID);
+router.delete("/:id", API.deleteID);
+router.put("/:id", API.completeID);
 
 module.exports = router;

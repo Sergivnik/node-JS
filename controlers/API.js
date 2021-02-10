@@ -1,24 +1,41 @@
 const db = require("../models/db.js");
+var tasks = require("../models/tasks.js");
 
 module.exports.taskGet = (req, res) => {
-  db.query("SELECT * FROM listtodo").then(([data, fields]) => {
-    res.send(data);
+  tasks.list((data) => {
+    if (data.error) {
+      // Я понимаю, что можно на фронте эту ошибку отловить также, но этот рендер уже сделан
+      // и мне показалось так проще
+      res.render("errorPage.hbs", { err: data.error.errno });
+    } else {
+      res.send(data);
+    }
   });
 };
 module.exports.taskAdd = (req, res) => {
-  db.query("INSERT INTO listtodo SET ?", req.body).then(([data, fields]) => {
-    res.send(data);
+  tasks.add(req.body, (data) => {
+    if (data.error) {
+      res.render("errorPage.hbs", { err: data.error.errno });
+    } else {
+      res.send(data);
+    }
   });
 };
 module.exports.deleteID = (req, res) => {
-  db.query("DELETE FROM listtodo WHERE ?", req.body).then(([data, fields]) => {
-    res.send(data);
+  tasks.delete(req.params, (data) => {
+    if (data.error) {
+      res.render("errorPage.hbs", { err: data.error.errno });
+    } else {
+      res.send(data);
+    }
   });
 };
 module.exports.completeID = (req, res) => {
-  db.query(`UPDATE listtodo SET ? where id=${req.body.id}`, [{ complete: "1" }]).then(
-    ([data, fields]) => {
+  tasks.complete(req.params, (data) => {
+    if (data.error) {
+      res.render("errorPage.hbs", { err: data.error.errno });
+    } else {
       res.send(data);
     }
-  );
+  });
 };
