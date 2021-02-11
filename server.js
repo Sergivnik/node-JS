@@ -52,6 +52,36 @@ app.get(
   }
 );
 
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
+io.use((socket, next) => {
+  session.sessionMiddleware(socket.request, {}, next);
+});
+io.on("connection", (socket) => {
+  if (!socket.request.session || !socket.request.session.username) {
+    console.log("Unauthorised user connected!");
+    socket.disconnect();
+    return;
+  }
+
+  console.log("Chat user connected:", socket.request.session.username);
+
+  socket.on("disconnect", () => {
+    console.log("Chat user disconnected:", socket.request.session.username);
+  });
+
+  socket.on("chatMessage", (data) => {
+    console.log(
+      "Chat message from",
+      socket.request.session.username + ":",
+      data
+    );
+    data.message = socket.request.session.username + ": " + data.message;
+    io.emit("chatMessage", data);
+    // console.log(io.sockets.sockets);
+  });
+});
+
 app.use(router);
 
-app.listen(3000, () => console.log("Listening on port 3000"));
+http.listen(3000, () => console.log("Listening on port 3000"));
