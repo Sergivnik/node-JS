@@ -54,6 +54,7 @@ app.get(
 
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
+let users = [];
 io.use((socket, next) => {
   session.sessionMiddleware(socket.request, {}, next);
 });
@@ -65,9 +66,15 @@ io.on("connection", (socket) => {
   }
 
   console.log("Chat user connected:", socket.request.session.username);
+  users.push(socket.request.session.username);
+  console.log(users);
 
   socket.on("disconnect", () => {
     console.log("Chat user disconnected:", socket.request.session.username);
+  });
+
+  socket.on("chatUsers", () => {
+    io.emit("chatUsers", users);
   });
 
   socket.on("chatMessage", (data) => {

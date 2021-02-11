@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,13 +13,15 @@
 
 <body>
     <ul id="messages"></ul>
+    <button id="btn">get users</button>
     <form action="">
         <input id="m" autocomplete="off" /><button onClick="submitMessage(event)">Send</button>
     </form>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
-
+        btn = document.getElementById("btn");
         function submitMessage(e) {
             const messageEl = document.getElementById('m');
 
@@ -29,7 +32,9 @@
             messageEl.focus();
             return false;
         }
-
+        btn.onclick = () => {
+            socket.emit("chatUsers", {})
+        }
         socket.on('chatMessage', function (msg) {
             const messagesEl = document.getElementById('messages');
 
@@ -38,6 +43,10 @@
 
             messagesEl.appendChild(messageEl);
         });
+
+        socket.on("chatUsers", (users) => {
+            console.log(users)
+        })
 
     </script>
 </body>
