@@ -22,7 +22,7 @@ passport.use(
     {
       clientID: yadata.CLIENT_ID,
       clientSecret: yadata.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/yandex/callback",
+      callbackURL: "http://192.168.0.106:3000/auth/yandex/callback",
     },
     function (accessToken, refreshToken, profile, done) {
       process.nextTick(function () {
