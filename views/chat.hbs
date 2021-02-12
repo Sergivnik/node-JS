@@ -13,7 +13,9 @@
 
 <body>
     <ul id="messages"></ul>
-    <button id="btn">get users</button>
+    <button id="btnSerg">Serg</button>
+    <button id="btnVan">Van</button>
+    <button id="btnSergPetrNik">SergPetrNik</button>
     <form action="">
         <input id="m" autocomplete="off" /><button onClick="submitMessage(event)">Send</button>
     </form>
@@ -21,7 +23,9 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
-        btn = document.getElementById("btn");
+        Serg = document.getElementById("btnSerg");
+        Van = document.getElementById("btnVan");
+        SergPetrNik = document.getElementById("btnSergPetrNik");
         function submitMessage(e) {
             const messageEl = document.getElementById('m');
 
@@ -32,10 +36,18 @@
             messageEl.focus();
             return false;
         }
-        btn.onclick = () => {
-            socket.emit("chatUsers", {})
+        Van.onclick = () => {
+            socket.emit("switchRoom", "Van")
         }
+        Serg.onclick = () => {
+            socket.emit("switchRoom", "Serg")
+        }
+        SergPetrNik.onclick = () => {
+            socket.emit("switchRoom", "SergPetrNik")
+        }
+
         socket.on('chatMessage', function (msg) {
+            console.log(socket.id)
             const messagesEl = document.getElementById('messages');
 
             const messageEl = document.createElement('li');
