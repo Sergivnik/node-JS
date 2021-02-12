@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/style.css" type="text/css">
+        <title>Socket.IO chat</title>
+    </head>
+</head>
+
+<body>
+    <ul id="messages"></ul>
+    <button id="btnSerg">Serg</button>
+    <button id="btnVan">Van</button>
+    <button id="btnSergPetrNik">SergPetrNik</button>
+    <form action="">
+        <input id="m" autocomplete="off" /><button onClick="submitMessage(event)">Send</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        Serg = document.getElementById("btnSerg");
+        Van = document.getElementById("btnVan");
+        SergPetrNik = document.getElementById("btnSergPetrNik");
+        function submitMessage(e) {
+            const messageEl = document.getElementById('m');
+
+            e.preventDefault();
+            console.log('chatMessage', messageEl.value);
+            socket.emit('chatMessage', { message: messageEl.value });
+            messageEl.value = '';
+            messageEl.focus();
+            return false;
+        }
+        Van.onclick = () => {
+            socket.emit("switchRoom", "Van")
+        }
+        Serg.onclick = () => {
+            socket.emit("switchRoom", "Serg")
+        }
+        SergPetrNik.onclick = () => {
+            socket.emit("switchRoom", "SergPetrNik")
+        }
+
+        socket.on('chatMessage', function (msg) {
+            console.log(socket.id)
+            const messagesEl = document.getElementById('messages');
+
+            const messageEl = document.createElement('li');
+            messageEl.textContent = msg.message;
+
+            messagesEl.appendChild(messageEl);
+        });
+
+        socket.on("chatUsers", (users) => {
+            console.log(users)
+        })
+
+    </script>
+</body>
+
+</html>

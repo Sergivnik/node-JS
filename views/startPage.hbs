@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/style.css" type="text/css">
+  <title>ListToDo</title>
+</head>
+
+<body>
+  <h2>List to do</h2>
+  <table class="tbl">
+    <tr>
+      <td class="tbl">ID</td>
+      <td class="tbl">Business</td>
+      <td class="tbl">Priority</td>
+      <td class="tbl">comlete</td>
+    </tr>
+    {{#each data}}
+    <tr>
+      <td class="tbl-slim">{{id}}</td>
+      <td class="tbl-slim">{{task}}</td>
+      <td class="tbl-slim">{{priority}}</td>
+      <td class="tbl-slim">{{complete}}</td>
+    </tr>
+    {{/each}}
+  </table>
+  <a href="/ADD">Add task</a>
+  <a href="/DELETE">Delete task</a>
+  <a href="/SEARCH">Change task</a>
+  <a href="/COMPLETE">Complete task</a>
+  <a href="/CHAT">Chat</a>
+  <a href="/auth/exit">Exit</a>
+  <br>
+  <button id="btn">Get Data</button>
+  <script>
+    let btn = document.getElementById("btn");
+    btn.onclick = async () => {
+      let response = await fetch("/API/getDATA");
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
+        btn.remove();
+        let tbl = document.createElement("table");
+        tbl.className = "tbl";
+        document.body.append(tbl)
+        data.forEach((elem) => {
+          let tr = document.createElement("tr");
+          tr.className = "tbl-slim";
+          tbl.append(tr)
+          let td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerText = elem.id;
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerText = elem.task;
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerText = elem.priority;
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerText = elem.complete;
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerHTML = `<button id=delete-${elem.id}>Delete</button>`;
+          tr.append(td);
+          td = document.createElement("td");
+          td.className = "tbl-slim";
+          td.innerHTML = `<button id=complete-${elem.id}>Complete</button>`;
+          tr.append(td);
+        })
+        let btnAdd = document.createElement("button");
+        btnAdd.innerText = "Add";
+        tbl.after(btnAdd);
+        btnAdd.onclick = () => {
+          let send = document.createElement("button");
+          send.innerText = "Send";
+          btnAdd.after(send);
+          let priority = document.createElement("input");
+          priority.name = "task";
+          btnAdd.after(priority);
+          let task = document.createElement("input");
+          task.name = "task";
+          btnAdd.after(task);
+          send.onclick = async () => {
+            console.log(priority.value);
+            console.log(task.value);
+            let newTask = { task: task.value, priority: priority.value, complete: 0 }
+            let response = await fetch("/API/addDATA", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              },
+              body: JSON.stringify(newTask)
+            });
+          }
+        }
+        tbl.onclick = async (event) => {
+          let target = event.target;
+          let str = target.id;
+          let action, id;
+          if (str.includes("delete")) {
+            action = "delete";
+            id = str.substring(7);
+            let response = await fetch(`/API/${id}`, {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              },
+              body: JSON.stringify()
+            });
+          };
+          if (str.includes("complete")) {
+            action = "complete";
+            id = str.substring(9);
+            console.log(action, id);
+            let response = await fetch(`/API/${id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              },
+              body: JSON.stringify()
+            });
+          };
+
+        }
+      }
+      else {
+        console.log("Error", response.status)
+      }
+    }
+  </script>
+</body>
+
+</html>
