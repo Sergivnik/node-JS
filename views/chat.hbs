@@ -13,6 +13,7 @@
 
 <body>
     <ul id="messages"></ul>
+    <span>Rooms:</span>
     <button id="btnSerg">Serg</button>
     <button id="btnVan">Van</button>
     <button id="btnSergPetrNik">SergPetrNik</button>
@@ -45,7 +46,7 @@
         SergPetrNik.onclick = () => {
             socket.emit("switchRoom", "SergPetrNik")
         }
-
+        socket.on("userConnect", (msg) => { console.log(msg) })
         socket.on('chatMessage', function (msg) {
             console.log(socket.id)
             const messagesEl = document.getElementById('messages');

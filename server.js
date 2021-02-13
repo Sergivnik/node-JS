@@ -65,13 +65,26 @@ io.on("connection", (socket) => {
     socket.disconnect();
     return;
   }
-
+  // make socket and own room
   socket.join(socket.request.session.username);
+
+  // send everyone
+  // io.sockets.emit("userConnect", {
+  //   id: socket.id,
+  //   name: socket.request.session.username,
+  // });
+
+  // send everyone exept sender
+  socket.broadcast.emit("userConnect", {
+    id: socket.id,
+    name: socket.request.session.username,
+  });
 
   socket.on("disconnect", () => {
     console.log("Chat user disconnected:", socket.request.session.username);
   });
 
+  // change room 
   socket.on("switchRoom", (users) => {
     console.log(socket.rooms);
     socket.leave(user);
@@ -79,6 +92,7 @@ io.on("connection", (socket) => {
     user = users;
   });
 
+  // send message to chosen room
   socket.on("chatMessage", (data) => {
     console.log(socket.rooms);
     data.message = socket.request.session.username + ": " + data.message;

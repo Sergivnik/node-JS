@@ -22,24 +22,25 @@ ul {
 }
 
 form {
-  background: #000;
+  border: 1px solid #000;
   padding: 3px;
   position: fixed;
   bottom: 0;
   width: 90%;
+  height: 7.2vh;
 }
 
 form input {
-  border: 0;
+  border: 1px solid #000;
   padding: 10px;
   width: 80%;
   margin-right: 0.5%;
 }
 
 form button {
+  border: 1px solid #000;
   width: 19%;
   background: rgb(130, 224, 255);
-  border: none;
   padding: 10px;
 }
 
